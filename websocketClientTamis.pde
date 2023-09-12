@@ -3,6 +3,7 @@ import http.requests.*;
 
 WebsocketClient wsc;
 int now;
+String domain;
 String messagesEndpoint;
 String scheduledContentEndpoint;
 String jsonResponse;
@@ -13,9 +14,10 @@ String[] scheduledContent;
 String commandJson = "{\"command\":\"subscribe\",\"identifier\":\"{\\\"channel\\\":\\\"AcceptedMessagesChannel\\\",\\\"project\\\":\\\"1\\\"}\"}";
 
 void getScheduledContent() {
+  scheduledContentEndpoint = "http://" + domain + "/api/current_scheduled_content/1";
   GetRequest get = new GetRequest(scheduledContentEndpoint);
   get.addHeader("Accept", "application/json");
-  get.addHeader("secret_token", securityToken);
+  get.addHeader("secret-token", securityToken);
   get.send();
   jsonResponse = get.getContent();
   JSONObject json = parseJSONObject(jsonResponse);
@@ -24,6 +26,7 @@ void getScheduledContent() {
 }
 
 void connectToMessagesChannel() {
+  messagesEndpoint = "ws://" + domain + "/cable?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJCk7-C3W3jk9TjMlO2Di-QrJzQo0";
   newMessage=false;
 
   wsc= new WebsocketClient(this, messagesEndpoint);
@@ -32,9 +35,8 @@ void connectToMessagesChannel() {
 }
 
 void setup() {
-  securityToken = "choucroute";
-  messagesEndpoint = "ws://localhost:3000/cable?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJCk7-C3W3jk9TjMlO2Di-QrJzQo0";
-  scheduledContentEndpoint = "http://127.0.0.1:3000/api/current_scheduled_content/1";
+  securityToken = "dTJNVKPYdUZ0kwhivU3zqw";
+  domain = "localhost:3000";
   getScheduledContent();
   connectToMessagesChannel();
 
