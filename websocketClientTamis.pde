@@ -1,6 +1,7 @@
 import websockets.*;
 import http.requests.*;
 
+
 WebsocketClient wsc;
 int now;
 String domain;
@@ -12,7 +13,7 @@ String[] scheduledContent;
 String commandJson = "{\"command\":\"subscribe\",\"identifier\":\"{\\\"channel\\\":\\\"AcceptedMessagesChannel\\\",\\\"project\\\":\\\"1\\\"}\"}";
 
 void getScheduledContent() {
-  String scheduledContentEndpoint = "http://" + domain + "/api/current_scheduled_content/1";
+  String scheduledContentEndpoint = "http://" + domain + "/api/projects/choeur-zenith/current_scheduled_content";
   GetRequest get = new GetRequest(scheduledContentEndpoint);
   get.addHeader("Accept", "application/json");
   get.addHeader("secret-token", securityToken);
@@ -52,15 +53,15 @@ void closeEvent() {
 void connectToMessagesChannel() {
   String messagesEndpoint = "ws://" + domain + "/cable?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJCk7-C3W3jk9TjMlO2Di-QrJzQo0";
   newMessage=false;
-
+//SslContextFactory ssl = new SslContextFactory(); 
   wsc= new WebsocketClient(this, messagesEndpoint);
 
   wsc.sendMessage(commandJson);
 }
 
 void setup() {
-  securityToken = "l67APSscL_Gf7BLoabaDYw";
-  domain = "tamis.apps.motapi.com";
+  securityToken = "qKZa7zp2jbN59qvKquShNA";
+  domain = "choeur-zenith.com";
   //domain = "localhost:3000";
   getScheduledContent();
   openSubmissions();
