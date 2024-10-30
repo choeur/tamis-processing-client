@@ -27,7 +27,7 @@ void getScheduledContent() {
 }
 
 void openSubmissions() {
-  String openSubmissionsEndpoint = "https://" + domain + "/api/open_submissions/1";
+  String openSubmissionsEndpoint = "https://" + domain + "/api/projects/choeur-zenith/open_submissions";
   PutRequest put = new PutRequest(openSubmissionsEndpoint);
   put.addHeader("Accept", "application/json");
   put.addHeader("secret-token", securityToken);
@@ -35,7 +35,7 @@ void openSubmissions() {
 }
 
 void pauseSubmissions() {
-  String pauseSubmissionsEndpoint = "https://" + domain + "/api/pause_submissions/1";
+  String pauseSubmissionsEndpoint = "https://" + domain + "/api/projects/choeur-zenith/pause_submissions";
   PutRequest put = new PutRequest(pauseSubmissionsEndpoint);
   put.addHeader("Accept", "application/json");
   put.addHeader("secret-token", securityToken);
@@ -43,7 +43,7 @@ void pauseSubmissions() {
 }
 
 void closeEvent() {
-  String closeEventEndpoint = "https://" + domain + "/api/close_event/1";
+  String closeEventEndpoint = "https://" + domain + "/api/projects/choeur-zenith/close_event";
   PutRequest put = new PutRequest(closeEventEndpoint);
   put.addHeader("Accept", "application/json");
   put.addHeader("secret-token", securityToken);
